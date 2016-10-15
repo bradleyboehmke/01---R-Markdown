@@ -1,0 +1,75 @@
+---
+title: "Stock Report"
+author: "Brad Boehmke"
+date: '`r Sys.Date()`'
+output: html_document
+params:
+  symbol:
+    choices:
+    - AMZN
+    - GOOG
+    - FB
+    value: AMZN
+---
+
+# Stock: `r params$symbol`
+
+```{r, message=FALSE, echo=FALSE}
+# Packages used - run the next two lines of code if you do not have these
+# packages installed on your computer
+# pkgs <- c("xts", "quantmod")
+# install.packages(pkgs)
+library(xts)
+library(quantmod)
+
+# load data
+prices <- getSymbols(params$symbol, auto.assign = FALSE)
+
+# get the most recent opening & closing prices
+move <- Cl(last(prices)) - Op(last(prices))
+```
+
+
+## Recommendation: `r ifelse(move > 0, "BUY", "SELL")`
+
+`r params$symbol` will `r ifelse(move > 0, "increase", "decrease")` in price during the next trading period. 
+
+
+## Price History
+
+The chart below is made with the `quantmod` R package, a widely used package for collecting and visualizing financial data in R. You can learn more about `quantmod` at the website [www.quantmod.com](rstudio.github.io/DT/).  
+
+***
+
+```{r, echo=FALSE, fig.align='center', fig.width=9}
+# plot historical stock prices
+chartSeries(prices, theme = chartTheme("white", bg.col = "white"))
+```
+
+
+## Method
+
+This forecast was predicted with the *recency algorithm*, a simple---probably useless---method for determining stock prices. The recency algorithm predicts that the next price movement, $M_{j}$, will be in the same direction as the most recent price movement. $M_{i}$.
+
+$$M_{i}= Close_{i} - Open_{i}$$
+
+$$
+    M_{j}= 
+        \begin{cases}
+                > 0,  & \text{if } M_{i} > 0\\
+                \leq 0, & \text{if } M_{i}\leq 0
+        \end{cases}
+$$
+
+## Raw Data
+
+The table below displays the daily price data for the stock. In the next section, we will learn how to make a concise, interactive table with the `DT` package, a new package for making searchable data tables. You can learn more about the `DT` package at the website [rstudio.github.io/DT/](rstudio.github.io/DT/).  
+
+***
+
+```{r, echo=FALSE, comment=' '}
+# show stock info for last 7 days
+knitr::kable(tail(prices, 7)[, 1:5], caption = 'Stock information for last 7 business days')
+```
+
+

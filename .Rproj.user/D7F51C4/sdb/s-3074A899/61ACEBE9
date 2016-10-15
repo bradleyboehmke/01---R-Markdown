@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Packages used - run the next two lines of code if you do not have these\n# packages installed on your computer\n# pkgs <- c(\"xts\", \"quantmod\")\n# install.packages(pkgs)\nlibrary(xts)\nlibrary(quantmod)\n\n# load data\nprices <- getSymbols(\"GOOG\", auto.assign = FALSE)\n\n# get the most recent opening & closing prices\nmove <- Cl(last(prices)) - Op(last(prices))\n\n# determine if you buy or sell\nifelse(move > 0, \"BUY\", \"SELL\")\n\n# plot historical stock prices\nchartSeries(prices, theme = chartTheme(\"white\", bg.col = \"white\"))\n\n# show stock info for last 7 days\ntail(prices, 7)[, 1:5]\n\n",
+    "created" : 1476488877028.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3657750730",
+    "id" : "61ACEBE9",
+    "lastKnownWriteTime" : 1476489414,
+    "last_content_update" : 1476489414817,
+    "path" : "~/Dropbox/Data Wrangling with R/R Markdown/stock-code.R",
+    "project_path" : "stock-code.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
