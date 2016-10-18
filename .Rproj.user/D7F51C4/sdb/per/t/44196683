@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"Stock Recommendation\"\nauthor: \"Your name here\"\ndate: '`r Sys.Date()`'\noutput: html_document\nparams:\n  symbol:\n    choices:\n    - AMZN\n    - GOOG\n    - FB\n    - TSLA\n    value: AMZN\n---\n\n# Stock: `r params$symbol`\n\n```{r, include=FALSE}\n# Packages used - run the next two lines of code if you do not have these\n# packages installed on your computer\n# pkgs <- c(\"xts\", \"quantmod\")\n# install.packages(pkgs)\nlibrary(xts)\nlibrary(quantmod)\n\n# load data\nprices <- getSymbols(params$symbol, auto.assign = FALSE)\n\n# get the most recent opening & closing prices\nmove <- Cl(last(prices)) - Op(last(prices))\n```\n\n\n## Recommendation: `r ifelse(move > 0, \"BUY\", \"SELL\")`\n\n`r params$symbol` will `r ifelse(move > 0, \"increase\", \"decrease\")` in price during the next trading period. \n\n\n## Price History\n\nThe chart below is made with the `quantmod` R package, a widely used package for collecting and visualizing financial data in R. You can learn more about `quantmod` at the website [www.quantmod.com](rstudio.github.io/DT/).  \n\n***\n\n```{r, fig.align='center', fig.width=9, echo=FALSE}\n# plot historical stock prices\nchartSeries(prices, theme = chartTheme(\"white\", bg.col = \"white\"))\n```\n\n\n## Method\n\nThis forecast was predicted with the *recency algorithm*, a simple---probably useless---method for determining stock prices. The recency algorithm predicts that the next price movement, $M_{j}$, will be in the same direction as the most recent price movement. $M_{i}$.\n\n$$M_{i}= Close_{i} - Open_{i}$$\n\n$$\n    M_{j}= \n        \\begin{cases}\n                > 0,  & \\text{if } M_{i} > 0\\\\\n                \\leq 0, & \\text{if } M_{i}\\leq 0\n        \\end{cases}\n$$\n\n## Raw Data\n\nThe table below displays the daily price data for the stock. In the next section, we will learn how to make a concise, interactive table with the `DT` package, a new package for making searchable data tables. You can learn more about the `DT` package at the website [rstudio.github.io/DT/](rstudio.github.io/DT/).  \n\n***\n\n```{r, comment=' ', echo=FALSE}\n# show stock info for last 7 days\ntail(prices, 7)[, 1:5]\n```\n\n",
+    "created" : 1476557405557.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1612461556",
+    "id" : "44196683",
+    "lastKnownWriteTime" : 1476574405,
+    "last_content_update" : 1476574405113,
+    "path" : "~/Dropbox/Data Wrangling with R/R Markdown/stock-report2.Rmd",
+    "project_path" : "stock-report2.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

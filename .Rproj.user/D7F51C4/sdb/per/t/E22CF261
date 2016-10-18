@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Stock: GOOG\n\n## Recommendation: ?\n\nGOOG will ? in price during the next trading period. \n\n\n## Price History\n\nThe chart below is made with the `quantmod` R package, a widely used package for collecting and visualizing financial data in R. You can learn more about `quantmod` at the website [www.quantmod.com](rstudio.github.io/DT/).  \n\n***\n\n<< HISTORICAL PRICE PLOT HERE >>\n\n## Method\n\nThis forecast was predicted with the *recency algorithm*, a simple---probably useless---method for determining stock prices. The recency algorithm predicts that the next price movement, $M_{j}$, will be in the same direction as the most recent price movement. $M_{i}$.\n\n$$M_{i}= Close_{i} - Open_{i}$$\n\n$$\n    M_{j}= \n        \\begin{cases}\n                > 0,  & \\text{if } M_{i} > 0\\\\\n                \\leq 0, & \\text{if } M_{i}\\leq 0\n        \\end{cases}\n$$\n\n## Raw Data\n\nThe table below displays the daily price data for the stock. In the next section, we will learn how to make a concise, interactive table with the `DT` package, a new package for making searchable data tables. You can learn more about the `DT` package at the website [rstudio.github.io/DT/](rstudio.github.io/DT/).  \n\n***\n\n<< DATA HERE >>\n",
+    "created" : 1476557284779.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "353409733",
+    "id" : "E22CF261",
+    "lastKnownWriteTime" : 1476557304,
+    "last_content_update" : 1476557304537,
+    "path" : "~/Dropbox/Data Wrangling with R/R Markdown/stock-text.Rmd",
+    "project_path" : "stock-text.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

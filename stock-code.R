@@ -6,7 +6,7 @@ library(xts)
 library(quantmod)
 
 # load data
-prices <- getSymbols("GOOG", auto.assign = FALSE)
+prices <- getSymbols("AMZN", auto.assign = FALSE)
 
 # get the most recent opening & closing prices
 move <- Cl(last(prices)) - Op(last(prices))
